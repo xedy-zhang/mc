@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" scanPeriod="60 second" debug="false">
+ 
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%5level] [%thread] %logger{0} %msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+ 
+    <appender name="DEBUG" class="ch.qos.logback.core.FileAppender">
+        <file>debug.log</file>
+        <append>true</append>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%5level] [%thread] %logger{0} %msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+ 
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>info.log</File>
+ 
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+ 
+        <encoder>
+            <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%5level] [%thread] %logger{0} %msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+ 
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender >
+ 
+    <!--<!– 异常日志输出 –>-->
+    <!--<appender name="EXCEPTION" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>exception.log</file>-->
+        <!--<!– 求值过滤器，评估、鉴别日志是否符合指定条件. 需要额外的两个JAR包，commons-compiler.jar和janino.jar –>-->
+        <!--<filter class="ch.qos.logback.core.filter.EvaluatorFilter">-->
+            <!--<!– 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator –>-->
+            <!--<evaluator>-->
+                <!--<!– 过滤掉所有日志消息中不包含"Exception"字符串的日志 –>-->
+                <!--<expression>return message.contains("Exception");</expression>-->
+            <!--</evaluator>-->
+            <!--<OnMatch>ACCEPT</OnMatch>-->
+            <!--<OnMismatch>DENY</OnMismatch>-->
+        <!--</filter>-->
+ 
+        <!--<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+            <!--<!– 触发节点，按固定文件大小生成，超过5M，生成新的日志文件 –>-->
+            <!--<maxFileSize>5MB</maxFileSize>-->
+        <!--</triggeringPolicy>-->
+    <!--</appender>-->
+ 
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>error.log</file>
+ 
+        <encoder>
+            <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%5level] [%thread] %logger{0} %msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+ 
+        <!-- 按照固定窗口模式生成日志文件，当文件大于20MB时，生成新的日志文件。
+        -    窗口大小是1到3，当保存了3个归档文件后，将覆盖最早的日志。
+        -    可以指定文件压缩选项
+        -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>error.%d{yyyy-MM}(%i).log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>3</maxIndex>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+    </appender>
+ 
+    <!-- 异步输出 -->
+    <appender name ="ASYNC" class= "ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold >0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref ="ERROR"/>
+    </appender>
+ 
+    <logger name="com.qzl.portal" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="DEBUG"/>-->
+        <!--<appender-ref ref="EXCEPTION"/>-->
+        <!--<appender-ref ref="INFO"/>-->
+        <!--<appender-ref ref="ERROR"/>-->
+        <!-- <appender-ref ref="ASYNC"/> -->
+    </logger>
+ 
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="DEBUG"/>-->
+        <!--<appender-ref ref="EXCEPTION"/>-->
+        <!--<appender-ref ref="INFO"/>-->
+        <!-- <appender-ref ref="ASYNC"/> -->
+    </root>
+</configuration>

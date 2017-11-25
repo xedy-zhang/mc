@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="portal-web-view">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="portal-web-ctrl-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/portal-web-ctrl/portal-web-ctrl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="portal-web-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/portal-web-service/portal-web-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="portal-web-dao-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/portal-web-dao/portal-web-dao">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="portal-web-api-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/portal-web-api/portal-web-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="portal-web-vo-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/portal-web-vo/portal-web-vo">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="portal-web-cxt-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/portal-web-cxt/portal-web-cxt">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/portal-web-view/target/classes"/>
+        <property name="context-root" value="portal-web-view"/>
+    </wb-module>
+</project-modules>

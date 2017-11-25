@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>packaging</groupId>
+		<artifactId>mc</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.mc</groupId>
+	<artifactId>portal-web-service</artifactId>
+	<name>portal-web-service</name>
+	<dependencies>
+		<dependency>
+			<groupId>com.mc</groupId>
+			<artifactId>portal-web-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mc</groupId>
+			<artifactId>portal-web-dao</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mc</groupId>
+			<artifactId>portal-web-cxt</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+</project>
